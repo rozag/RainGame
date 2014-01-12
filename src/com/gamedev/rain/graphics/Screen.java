@@ -9,7 +9,9 @@ public class Screen {
     public final int MAP_SIZE = 8;
     public final int MAP_SIZE_MASK = MAP_SIZE - 1;
 
-    private int width, height;
+    public int xOffset, yOffset;
+
+    public int width, height;
     public int[] pixels;
     public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
     private Random random = new Random();
@@ -45,6 +47,8 @@ public class Screen {
     }
 
     public void renderTile(int xPos, int yPos, Tile tile) {
+        xPos -= xOffset;
+        yPos -= yOffset;
         for (int y = 0; y < tile.sprite.SIZE; y++) {
             int yAbs = y + yPos;
             for (int x = 0; x < tile.sprite.SIZE; x++) {
@@ -54,6 +58,11 @@ public class Screen {
                 pixels[xAbs + yAbs * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
             }
         }
+    }
+
+    public void setOffset(int xOffset, int yOffset) {
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
     }
 
 }
