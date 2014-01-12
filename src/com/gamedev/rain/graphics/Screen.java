@@ -1,5 +1,7 @@
 package com.gamedev.rain.graphics;
 
+import com.gamedev.rain.level.tile.Tile;
+
 import java.util.Random;
 
 public class Screen {
@@ -28,17 +30,28 @@ public class Screen {
         }
     }
 
-    public void render(int yOffset, int xOffset) {
+    public void render(int xOffset, int yOffset) {
         for (int y = 0; y < height; y++) {
-            int yy = y + yOffset;
-//            if (yy > height || yy < 0) break;
-
+            int yPixel = y + yOffset;
+            if (yPixel < 0 || yPixel >= height)
+                continue;
             for (int x = 0; x < width; x++) {
-                int xx = x + xOffset;
-//                if (xx > width || xx < 0) break;
+                int xPixel = x + xOffset;
+                if (xPixel < 0 || xPixel >= width)
+                    continue;
+                pixels[xPixel + yPixel * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.SIZE];
+            }
+        }
+    }
 
-                int tileIndex = ((xx >> 4) & MAP_SIZE_MASK) + ((yy >> 4) & MAP_SIZE_MASK) * MAP_SIZE;
-                pixels[x + y * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.SIZE];
+    public void renderTile(int xPos, int yPos, Tile tile) {
+        for (int y = 0; y < tile.sprite.SIZE; y++) {
+            int yAbs = y + yPos;
+            for (int x = 0; x < tile.sprite.SIZE; x++) {
+                int xAbs = x + xPos;
+                if (xAbs < 0 || xAbs >= width || yAbs < 0 || yAbs >= height)
+                    break;
+                pixels[xAbs + yAbs * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
             }
         }
     }

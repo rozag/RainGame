@@ -54,7 +54,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-        screen.render(y, x);
+        screen.render(x, y);
 
         for (int i = 0; i < pixels.length; i++) {  //TODO Этот цикл неэффективный
             pixels[i] = screen.pixels[i];          //TODO Можно сделать быстрее
@@ -96,7 +96,7 @@ public class Game extends Canvas implements Runnable {
         double deltaTime = 0;
 
         int frames = 0, updates = 0;
-
+        requestFocus();
         while (running) {
             long currentTime = System.nanoTime();
             deltaTime += (currentTime - lastTime) / nanoSeconds;
