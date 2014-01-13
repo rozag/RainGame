@@ -2,6 +2,8 @@ package com.gamedev.rain;
 
 import com.gamedev.rain.graphics.Screen;
 import com.gamedev.rain.input.Keyboard;
+import com.gamedev.rain.level.Level;
+import com.gamedev.rain.level.RandomLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +24,7 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
     private JFrame frame;
     private Keyboard keyboard;
+    private Level level;
 
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -33,6 +36,7 @@ public class Game extends Canvas implements Runnable {
         setPreferredSize(size);
         frame = new JFrame();
         screen = new Screen(width, height);
+        level = new RandomLevel(64, 64);
 
         keyboard = new Keyboard();
         addKeyListener(keyboard);
@@ -54,7 +58,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-        screen.render(x, y);
+        level.render(x, y, screen);
 
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = screen.pixels[i];

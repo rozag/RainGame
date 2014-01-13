@@ -32,20 +32,6 @@ public class Screen {
         }
     }
 
-    public void render(int xOffset, int yOffset) {
-        for (int y = 0; y < height; y++) {
-            int yPixel = y + yOffset;
-            if (yPixel < 0 || yPixel >= height)
-                continue;
-            for (int x = 0; x < width; x++) {
-                int xPixel = x + xOffset;
-                if (xPixel < 0 || xPixel >= width)
-                    continue;
-                pixels[xPixel + yPixel * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.SIZE];
-            }
-        }
-    }
-
     public void renderTile(int xPos, int yPos, Tile tile) {
         xPos -= xOffset;
         yPos -= yOffset;
@@ -53,8 +39,12 @@ public class Screen {
             int yAbs = y + yPos;
             for (int x = 0; x < tile.sprite.SIZE; x++) {
                 int xAbs = x + xPos;
-                if (xAbs < 0 || xAbs >= width || yAbs < 0 || yAbs >= height)
+                if (xAbs < -tile.sprite.SIZE || xAbs >= width || yAbs < -tile.sprite.SIZE || yAbs >= height)
                     break;
+                if (xAbs < 0)
+                    xAbs = 0;
+                if (yAbs < 0)
+                    yAbs = 0;
                 pixels[xAbs + yAbs * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
             }
         }
