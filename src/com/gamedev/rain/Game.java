@@ -47,8 +47,8 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void render() {
-        BufferStrategy bs = getBufferStrategy();
-        if (bs == null) {
+        BufferStrategy bufferStrategy = getBufferStrategy();
+        if (bufferStrategy == null) {
             createBufferStrategy(3);
             return;
         }
@@ -60,18 +60,18 @@ public class Game extends Canvas implements Runnable {
             pixels[i] = screen.pixels[i];
         }
 
-        Graphics g = bs.getDrawGraphics();
+        Graphics graphics = bufferStrategy.getDrawGraphics();
 
         {
-            g.setColor(Color.black);
-            g.fillRect(0, 0, getWidth(), getHeight());
+            graphics.setColor(Color.black);
+            graphics.fillRect(0, 0, getWidth(), getHeight());
             //TODO здесь будет вся графика
         }
 
-        g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+        graphics.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 
-        g.dispose();
-        bs.show();
+        graphics.dispose();
+        bufferStrategy.show();
     }
 
     public synchronized void start() {
@@ -95,8 +95,9 @@ public class Game extends Canvas implements Runnable {
         final double nanoSeconds = 1000000000.0 / 60.0;
         double deltaTime = 0;
 
-        int frames = 0, updates = 0;
         requestFocus();
+
+        int frames = 0, updates = 0;
         while (running) {
             long currentTime = System.nanoTime();
             deltaTime += (currentTime - lastTime) / nanoSeconds;
@@ -108,8 +109,8 @@ public class Game extends Canvas implements Runnable {
                 deltaTime--;
             }
 
-            render();   // Этот
-            frames++;   // и этот метод внести в цикл сверху, чтобы поставить fps ограничение
+            render();
+            frames++;
 
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
