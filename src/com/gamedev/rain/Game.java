@@ -1,5 +1,6 @@
 package com.gamedev.rain;
 
+import com.gamedev.rain.entity.mob.Player;
 import com.gamedev.rain.graphics.Screen;
 import com.gamedev.rain.input.Keyboard;
 import com.gamedev.rain.level.Level;
@@ -24,30 +25,28 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
     private JFrame frame;
     private Keyboard keyboard;
+
     private Level level;
+    private Player player;
 
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-
-    private int y = 0, x = 0;
 
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
         setPreferredSize(size);
         frame = new JFrame();
         screen = new Screen(width, height);
-        level = new RandomLevel(64, 64);
-
         keyboard = new Keyboard();
         addKeyListener(keyboard);
+
+        level = new RandomLevel(64, 64);
+        player = new Player(500, 300, keyboard);
     }
 
     public void update() {
         keyboard.update();
-        if (keyboard.up) y--;
-        if (keyboard.down) y++;
-        if (keyboard.left) x--;
-        if (keyboard.right) x++;
+        player.update();
     }
 
     public void render() {
@@ -58,7 +57,10 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-        level.render(x, y, screen);
+        int xScroll = player.x - width / 2;
+        int yScroll = player.y - height / 2;
+        level.render(xScroll, yScroll, screen);
+        player.render(screen);
 
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = screen.pixels[i];
@@ -73,7 +75,6 @@ public class Game extends Canvas implements Runnable {
         }
 
         graphics.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-
         graphics.dispose();
         bufferStrategy.show();
     }
