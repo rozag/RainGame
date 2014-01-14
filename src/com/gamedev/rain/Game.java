@@ -41,7 +41,7 @@ public class Game extends Canvas implements Runnable {
         addKeyListener(keyboard);
 
         level = new RandomLevel(64, 64);
-        player = new Player(500, 300, keyboard);
+        player = new Player(0, 0, keyboard);
     }
 
     public void update() {
