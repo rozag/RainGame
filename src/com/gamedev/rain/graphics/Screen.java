@@ -50,12 +50,18 @@ public class Screen {
         }
     }
 
-    public void renderPlayer(int xPos, int yPos, Sprite sprite) {
+    public void renderPlayer(int xPos, int yPos, Sprite sprite, boolean xFlip, boolean yFlip) {
         xPos -= xOffset;
         yPos -= yOffset;
         for (int y = 0; y < 32; y++) {
             int yAbs = y + yPos;
+            int ys = y;
+            if (yFlip)
+                ys = 31 - y;
             for (int x = 0; x < 32; x++) {
+                int xs = x;
+                if (xFlip)
+                    xs = 31 - x;
                 int xAbs = x + xPos;
                 if (xAbs < -32 || xAbs >= width || yAbs < -32 || yAbs >= height)
                     break;
@@ -64,7 +70,7 @@ public class Screen {
                 if (yAbs < 0)
                     yAbs = 0;
 
-                int colour = sprite.pixels[x + y * 32];
+                int colour = sprite.pixels[xs + ys * 32];
                 if (colour != 0xffff00ff)
                     pixels[xAbs + yAbs * width] = colour;
             }

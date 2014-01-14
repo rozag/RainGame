@@ -7,6 +7,7 @@ public abstract class Tile {
 
     public int x, y;
     public Sprite sprite;
+    private boolean solid = false;
 
     public static Tile grass = new GrassTile(Sprite.grass);
     public static Tile voidTile = new VoidTile(Sprite.voidSprite);
@@ -18,8 +19,8 @@ public abstract class Tile {
     public void render(int x, int y, Screen screen) {
     }
 
-    public boolean solid() {
-        return false;
+    public boolean isSolid() {
+        return solid;
     }
 
 }

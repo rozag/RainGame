@@ -7,7 +7,8 @@ public abstract class Mob extends Entity {
 
     protected Sprite sprite;
     protected int direction = 2;
-    protected boolean moving = false;
+    protected boolean walking = false;
+    protected int animate = 0;
 
     public void move(int x, int y) {
         if (y < 0) direction = 0; // Up
