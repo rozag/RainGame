@@ -2,12 +2,10 @@ package com.gamedev.rain.level.tile;
 
 import com.gamedev.rain.graphics.Sprite;
 
-public class VoidTile extends Tile {
+public class FlowerTile extends Tile {
 
-    public VoidTile(Sprite sprite) {
+    public FlowerTile(Sprite sprite) {
         super(sprite);
     }
-
-
 
 }

@@ -4,7 +4,7 @@ import com.gamedev.rain.entity.mob.Player;
 import com.gamedev.rain.graphics.Screen;
 import com.gamedev.rain.input.Keyboard;
 import com.gamedev.rain.level.Level;
-import com.gamedev.rain.level.RandomLevel;
+import com.gamedev.rain.level.SpawnLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable {
 
-    public static int width = 300;
+    public static int width = 400;
     public static int height = width * 9 / 16;
     public static int scale = 3;
     private static final String TITLE = "Rain Game";
@@ -40,7 +40,7 @@ public class Game extends Canvas implements Runnable {
         keyboard = new Keyboard();
         addKeyListener(keyboard);
 
-        level = new RandomLevel(64, 64);
+        level = new SpawnLevel("/textures/level.png");
         player = new Player(0, 0, keyboard);
     }
 
