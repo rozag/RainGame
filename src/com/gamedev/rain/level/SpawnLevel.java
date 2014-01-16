@@ -8,8 +8,6 @@ import java.io.IOException;
 
 public class SpawnLevel extends Level {
 
-    private int[] levelPixels;
-
     public SpawnLevel(String path) {
         super(path);
     }
@@ -17,24 +15,27 @@ public class SpawnLevel extends Level {
     protected void loadLevel(String path) {
         try {
             BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(path));
-            int width = image.getWidth(), height = image.getHeight();
-            tiles = new Tile[width * height];
-            levelPixels = new int[width * height];
-            image.getRGB(0, 0, width, height, levelPixels, 0, width);
+            int w = width = image.getWidth();
+            int h = height = image.getHeight();
+            tiles = new int[w * h];
+            image.getRGB(0, 0, w, h, tiles, 0, w);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // 0xff00ff00 - grass
-    // 0xffffff00 - flower
-    // 0xff7f0000 - stone
     protected void generateLevel() {
-        for (int i = 0; i < levelPixels.length; i++) {
-            if (levelPixels[i] == 0xff00ff00) tiles[i] = Tile.grass;
-            else if (levelPixels[i] == 0xffffff00) tiles[i] = Tile.flower;
-            else if (levelPixels[i] == 0xff7f0000) tiles[i] = Tile.stone;
-        }
+    }
+
+    public Tile getTile(int x, int y) {
+        if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
+        else if (x + y * width >= 0 && tiles[x + y * width] == Tile.colour_spawn_grass) return Tile.spawn_grass;
+        else if (x + y * width >= 0 && tiles[x + y * width] == Tile.colour_spawn_hedge) return Tile.spawn_hedge;
+        else if (x + y * width >= 0 && tiles[x + y * width] == Tile.colour_spawn_water) return Tile.spawn_water;
+        else if (x + y * width >= 0 && tiles[x + y * width] == Tile.colour_spawn_wall_1) return Tile.spawn_wall_1;
+        else if (x + y * width >= 0 && tiles[x + y * width] == Tile.colour_spawn_wall_2) return Tile.spawn_wall_2;
+        else if (x + y * width >= 0 && tiles[x + y * width] == Tile.colour_spawn_floor) return Tile.spawn_floor;
+        else return Tile.voidTile;
     }
 
 }

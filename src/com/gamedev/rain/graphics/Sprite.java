@@ -7,27 +7,33 @@ public class Sprite {
     public int[] pixels;
     private SpriteSheet sheet;
 
-    public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
-    public static Sprite flower = new Sprite(16, 1, 0, SpriteSheet.tiles);
-    public static Sprite stone = new Sprite(16, 2, 0, SpriteSheet.tiles);
-    public static Sprite voidSprite = new Sprite(16, 0x009dff);
+    // Main sprites
+    public static Sprite grass = new Sprite(16, 0, 5, SpriteSheet.tiles);
+    public static Sprite voidSprite = new Sprite(16, 0x000000);
 
+    // Spawn level sprites
+    public static Sprite spawn_grass = new Sprite(16, 0, 0, SpriteSheet.spawnLevelTiles);
+    public static Sprite spawn_hedge = new Sprite(16, 1, 0, SpriteSheet.spawnLevelTiles);
+    public static Sprite spawn_water = new Sprite(16, 2, 0, SpriteSheet.spawnLevelTiles);
+    public static Sprite spawn_wall_1 = new Sprite(16, 0, 1, SpriteSheet.spawnLevelTiles);
+    public static Sprite spawn_wall_2 = new Sprite(16, 0, 2, SpriteSheet.spawnLevelTiles);
+    public static Sprite spawn_floor = new Sprite(16, 1, 1, SpriteSheet.spawnLevelTiles);
+
+    // Knight sprites
     public static Sprite[] playerUp = {
-            new Sprite(32, 1, 4, SpriteSheet.tiles),
-            new Sprite(32, 0, 4, SpriteSheet.tiles),
-            new Sprite(32, 2, 4, SpriteSheet.tiles)
+            new Sprite(32, 1, 7, SpriteSheet.tiles),
+            new Sprite(32, 0, 7, SpriteSheet.tiles),
+            new Sprite(32, 2, 7, SpriteSheet.tiles)
     };
-
     public static Sprite[] playerSide = {
-            new Sprite(32, 1, 3, SpriteSheet.tiles),
-            new Sprite(32, 0, 3, SpriteSheet.tiles),
-            new Sprite(32, 2, 3, SpriteSheet.tiles)
+            new Sprite(32, 1, 6, SpriteSheet.tiles),
+            new Sprite(32, 0, 6, SpriteSheet.tiles),
+            new Sprite(32, 2, 6, SpriteSheet.tiles)
     };
-
     public static Sprite[] playerDown = {
-            new Sprite(32, 1, 2, SpriteSheet.tiles),
-            new Sprite(32, 0, 2, SpriteSheet.tiles),
-            new Sprite(32, 2, 2, SpriteSheet.tiles)
+            new Sprite(32, 1, 5, SpriteSheet.tiles),
+            new Sprite(32, 0, 5, SpriteSheet.tiles),
+            new Sprite(32, 2, 5, SpriteSheet.tiles)
     };
 
     public Sprite(int size, int colour) {

@@ -4,7 +4,6 @@ import com.gamedev.rain.entity.mob.Player;
 import com.gamedev.rain.graphics.Screen;
 import com.gamedev.rain.input.Keyboard;
 import com.gamedev.rain.level.Level;
-import com.gamedev.rain.level.SpawnLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,8 +39,8 @@ public class Game extends Canvas implements Runnable {
         keyboard = new Keyboard();
         addKeyListener(keyboard);
 
-        level = new SpawnLevel("/textures/level.png");
-        player = new Player(0, 0, keyboard);
+        level = Level.spawn;
+        player = new Player(17 * 16, 83 * 16, keyboard);
     }
 
     public void update() {
