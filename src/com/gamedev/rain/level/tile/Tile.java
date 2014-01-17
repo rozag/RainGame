@@ -2,6 +2,7 @@ package com.gamedev.rain.level.tile;
 
 import com.gamedev.rain.graphics.Screen;
 import com.gamedev.rain.graphics.Sprite;
+import com.gamedev.rain.level.tile.spawn_level_tiles.*;
 
 public abstract class Tile {
 
@@ -10,16 +11,15 @@ public abstract class Tile {
     protected boolean solid = false;
 
     // Main tiles
-    public static Tile grass = new GrassTile(Sprite.grass);
     public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 
     // Spawn level tiles
-    public static Tile spawn_grass = new GrassTile(Sprite.spawn_grass);
-    public static Tile spawn_hedge = new GrassTile(Sprite.spawn_hedge);
-    public static Tile spawn_water = new GrassTile(Sprite.spawn_water);
-    public static Tile spawn_wall_1 = new GrassTile(Sprite.spawn_wall_1);
-    public static Tile spawn_wall_2 = new GrassTile(Sprite.spawn_wall_2);
-    public static Tile spawn_floor = new GrassTile(Sprite.spawn_floor);
+    public static Tile spawn_grass = new SpawnGrassTile(Sprite.spawn_grass);
+    public static Tile spawn_hedge = new SpawnHedgeTile(Sprite.spawn_hedge);
+    public static Tile spawn_water = new SpawnWaterTile(Sprite.spawn_water);
+    public static Tile spawn_wall_1 = new SpawnWallTile_1(Sprite.spawn_wall_1);
+    public static Tile spawn_wall_2 = new SpawnWallTile_2(Sprite.spawn_wall_2);
+    public static Tile spawn_floor = new SpawnFloorTile(Sprite.spawn_floor);
 
     // Colours of spawn level tiles
     public static final int colour_spawn_grass = 0xff00ff00;

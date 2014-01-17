@@ -16,7 +16,7 @@ public abstract class Mob extends Entity {
         if (y > 0) direction = 2; // Down
         if (x < 0) direction = 3; // Left
 
-        if (!collision()) {
+        if (!collision(x, y)) {
             this.x += x;
             this.y += y;
         }
@@ -25,8 +25,8 @@ public abstract class Mob extends Entity {
     public void update() {
     }
 
-    private boolean collision() {
-        return false;
+    private boolean collision(int x, int y) {
+        return level.getTile((this.x + x) / 16, (this.y + y) / 16).isSolid();
     }
 
     public void render() {

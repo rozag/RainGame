@@ -10,14 +10,14 @@ public class Player extends Mob {
 
     public Player(Keyboard input) {
         this.input = input;
-        sprite = Sprite.playerDown[0];
+        sprite = Sprite.wizardDown[0];
     }
 
     public Player(int x, int y, Keyboard input) {
         this.x = x;
         this.y = y;
         this.input = input;
-        sprite = Sprite.playerDown[0];
+        sprite = Sprite.wizardDown[0];
     }
 
     public void update() {
@@ -50,18 +50,22 @@ public class Player extends Mob {
             else
                 index = 2;
         }
-        if (direction == 0)
-            sprite = Sprite.playerUp[index];
-        else if (direction == 1)
-            sprite = Sprite.playerSide[index];
-        else if (direction == 2)
-            sprite = Sprite.playerDown[index];
+//        if (direction == 0) sprite = Sprite.knightUp[index];
+//        else if (direction == 1) sprite = Sprite.knightSide[index];
+//        else if (direction == 2) sprite = Sprite.knightDown[index];
+//        else {
+//            sprite = Sprite.knightSide[index];
+//            xFlip = true;
+//        }
+        if (direction == 0) sprite = Sprite.wizardUp[index];
+        else if (direction == 1) sprite = Sprite.wizardSide[index];
+        else if (direction == 2) sprite = Sprite.wizardDown[index];
         else {
-            sprite = Sprite.playerSide[index];
+            sprite = Sprite.wizardSide[index];
             xFlip = true;
         }
 
-        screen.renderPlayer(x - 16, y - 16, sprite, xFlip, yFlip);
+        screen.renderPlayer(x - 8, y - 8, sprite, xFlip, yFlip);
     }
 
 }

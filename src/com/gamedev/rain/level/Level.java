@@ -7,14 +7,14 @@ public abstract class Level {
 
     public int width, height;
     protected int[] tiles;
-//    protected int[] tilesInt;
+    protected int[] tilesInt;
 
     public static Level spawn = new SpawnLevel("/textures/levels/spawnLevel.png");
 
     public Level(int width, int height) {
         this.width = width;
         this.height = height;
-        tiles = new int[width * height];
+        tilesInt = new int[width * height];
         generateLevel();
     }
 

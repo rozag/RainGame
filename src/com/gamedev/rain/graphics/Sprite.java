@@ -8,7 +8,6 @@ public class Sprite {
     private SpriteSheet sheet;
 
     // Main sprites
-    public static Sprite grass = new Sprite(16, 0, 5, SpriteSheet.tiles);
     public static Sprite voidSprite = new Sprite(16, 0x000000);
 
     // Spawn level sprites
@@ -19,21 +18,38 @@ public class Sprite {
     public static Sprite spawn_wall_2 = new Sprite(16, 0, 2, SpriteSheet.spawnLevelTiles);
     public static Sprite spawn_floor = new Sprite(16, 1, 1, SpriteSheet.spawnLevelTiles);
 
-    // Knight sprites
-    public static Sprite[] playerUp = {
+    // Knight 32x32 sprites
+    public static Sprite[] knightUp = {
             new Sprite(32, 1, 7, SpriteSheet.tiles),
             new Sprite(32, 0, 7, SpriteSheet.tiles),
             new Sprite(32, 2, 7, SpriteSheet.tiles)
     };
-    public static Sprite[] playerSide = {
+    public static Sprite[] knightSide = {
             new Sprite(32, 1, 6, SpriteSheet.tiles),
             new Sprite(32, 0, 6, SpriteSheet.tiles),
             new Sprite(32, 2, 6, SpriteSheet.tiles)
     };
-    public static Sprite[] playerDown = {
+    public static Sprite[] knightDown = {
             new Sprite(32, 1, 5, SpriteSheet.tiles),
             new Sprite(32, 0, 5, SpriteSheet.tiles),
             new Sprite(32, 2, 5, SpriteSheet.tiles)
+    };
+
+    // Wizard 16x16 sprites
+    public static Sprite[] wizardUp = {
+            new Sprite(16, 14, 0, SpriteSheet.tiles),
+            new Sprite(16, 14, 1, SpriteSheet.tiles),
+            new Sprite(16, 14, 2, SpriteSheet.tiles)
+    };
+    public static Sprite[] wizardSide = {
+            new Sprite(16, 15, 0, SpriteSheet.tiles),
+            new Sprite(16, 15, 1, SpriteSheet.tiles),
+            new Sprite(16, 15, 2, SpriteSheet.tiles)
+    };
+    public static Sprite[] wizardDown = {
+            new Sprite(16, 13, 0, SpriteSheet.tiles),
+            new Sprite(16, 13, 1, SpriteSheet.tiles),
+            new Sprite(16, 13, 2, SpriteSheet.tiles)
     };
 
     public Sprite(int size, int colour) {

@@ -52,24 +52,25 @@ public class Screen {
     public void renderPlayer(int xPos, int yPos, Sprite sprite, boolean xFlip, boolean yFlip) {
         xPos -= xOffset;
         yPos -= yOffset;
-        for (int y = 0; y < 32; y++) {
+
+        for (int y = 0; y < sprite.SIZE; y++) {
             int yAbs = y + yPos;
             int ys = y;
             if (yFlip)
-                ys = 31 - y;
-            for (int x = 0; x < 32; x++) {
+                ys = sprite.SIZE - 1 - y;
+            for (int x = 0; x < sprite.SIZE; x++) {
                 int xs = x;
                 if (xFlip)
-                    xs = 31 - x;
+                    xs = sprite.SIZE - 1 - x;
                 int xAbs = x + xPos;
-                if (xAbs < -32 || xAbs >= width || yAbs < -32 || yAbs >= height)
+                if (xAbs < -sprite.SIZE || xAbs >= width || yAbs < -sprite.SIZE || yAbs >= height)
                     break;
                 if (xAbs < 0)
                     xAbs = 0;
                 if (yAbs < 0)
                     yAbs = 0;
 
-                int colour = sprite.pixels[xs + ys * 32];
+                int colour = sprite.pixels[xs + ys * sprite.SIZE];
                 if (colour != 0xffff00ff)
                     pixels[xAbs + yAbs * width] = colour;
             }

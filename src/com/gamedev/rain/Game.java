@@ -13,7 +13,7 @@ import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable {
 
-    public static int width = 400;
+    public static int width = 300;
     public static int height = width * 9 / 16;
     public static int scale = 3;
     private static final String TITLE = "Rain Game";
@@ -41,6 +41,7 @@ public class Game extends Canvas implements Runnable {
 
         level = Level.spawn;
         player = new Player(17 * 16, 83 * 16, keyboard);
+        player.initLevel(level);
     }
 
     public void update() {
@@ -61,17 +62,12 @@ public class Game extends Canvas implements Runnable {
         level.render(xScroll, yScroll, screen);
         player.render(screen);
 
-        for (int i = 0; i < pixels.length; i++) {
-            pixels[i] = screen.pixels[i];
-        }
+        System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
-        {
-            graphics.setColor(Color.black);
-            graphics.fillRect(0, 0, getWidth(), getHeight());
-            //TODO здесь будет вся графика
-        }
+        graphics.setColor(Color.black);
+        graphics.fillRect(0, 0, getWidth(), getHeight());
 
         graphics.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         graphics.dispose();
@@ -129,7 +125,7 @@ public class Game extends Canvas implements Runnable {
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
-        game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         game.frame.setVisible(true);
         game.frame.setTitle(TITLE);
         game.frame.add(game);

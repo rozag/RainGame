@@ -23,6 +23,10 @@ public abstract class Entity {
         removed = true;
     }
 
+    public void initLevel(Level level) {
+        this.level = level;
+    }
+
     public boolean isRemoved() {
         return removed;
     }
