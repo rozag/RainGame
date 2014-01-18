@@ -3,6 +3,7 @@ package com.gamedev.rain;
 import com.gamedev.rain.entity.mob.Player;
 import com.gamedev.rain.graphics.Screen;
 import com.gamedev.rain.input.Keyboard;
+import com.gamedev.rain.input.Mouse;
 import com.gamedev.rain.level.Level;
 
 import javax.swing.*;
@@ -13,9 +14,9 @@ import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable {
 
-    public static int width = 300;
-    public static int height = width * 9 / 16;
-    public static int scale = 3;
+    private static int width = 300;
+    private static int height = width * 9 / 16;
+    private static int scale = 3;
     private static final String TITLE = "Rain Game";
 
     private Screen screen;
@@ -37,16 +38,29 @@ public class Game extends Canvas implements Runnable {
         frame = new JFrame();
         screen = new Screen(width, height);
         keyboard = new Keyboard();
+
         addKeyListener(keyboard);
+        Mouse mouse = new Mouse();
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
 
         level = Level.spawn;
         player = new Player(17 * 16, 83 * 16, keyboard);
         player.initLevel(level);
     }
 
+    public static int getWindowWidth() {
+        return width * scale;
+    }
+
+    public static int getWindowHeight() {
+        return height * scale;
+    }
+
     public void update() {
         keyboard.update();
         player.update();
+        level.update();
     }
 
     public void render() {

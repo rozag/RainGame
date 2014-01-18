@@ -1,15 +1,20 @@
 package com.gamedev.rain.level;
 
+import com.gamedev.rain.entity.Entity;
 import com.gamedev.rain.graphics.Screen;
 import com.gamedev.rain.level.tile.Tile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Level {
+
+    public static Level spawn = new SpawnLevel("/textures/levels/spawnLevel.png");
 
     public int width, height;
     protected int[] tiles;
     protected int[] tilesInt;
-
-    public static Level spawn = new SpawnLevel("/textures/levels/spawnLevel.png");
+    protected List<Entity> entities = new ArrayList<Entity>();
 
     public Level(int width, int height) {
         this.width = width;
@@ -29,7 +34,14 @@ public abstract class Level {
     protected void loadLevel(String path) {
     }
 
+    public void add(Entity e) {
+        entities.add(e);
+    }
+
     public void update() {
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).update();
+        }
     }
 
     public void render(int xScroll, int yScroll, Screen screen) {
@@ -43,6 +55,10 @@ public abstract class Level {
             for (int x = x0; x < x1; x++) {
                 getTile(x, y).render(x, y, screen);
             }
+        }
+
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).render(screen);
         }
     }
 

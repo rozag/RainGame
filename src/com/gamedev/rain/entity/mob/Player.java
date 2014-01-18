@@ -1,8 +1,12 @@
 package com.gamedev.rain.entity.mob;
 
+import com.gamedev.rain.Game;
+import com.gamedev.rain.entity.projectile.Projectile;
+import com.gamedev.rain.entity.projectile.WizardProjectile;
 import com.gamedev.rain.graphics.Screen;
 import com.gamedev.rain.graphics.Sprite;
 import com.gamedev.rain.input.Keyboard;
+import com.gamedev.rain.input.Mouse;
 
 public class Player extends Mob {
 
@@ -20,6 +24,12 @@ public class Player extends Mob {
         sprite = Sprite.wizardDown[0];
     }
 
+    protected void shoot(int x, int y, double shootDirection) {
+        Projectile p = new WizardProjectile(x, y, shootDirection);
+        projectiles.add(p);
+        level.add(p);
+    }
+
     public void update() {
         int xa = 0, ya = 0;
 
@@ -27,6 +37,8 @@ public class Player extends Mob {
             animate++;
         else
             animate = 0;
+
+        updateShooting();
 
         if (input.up) ya--;
         if (input.right) xa++;
@@ -38,6 +50,13 @@ public class Player extends Mob {
             walking = true;
         } else {
             walking = false;
+        }
+    }
+
+    private void updateShooting() {
+        if (Mouse.getButton() == 1) {
+            double shootDirection = Math.atan2(Mouse.getY() - Game.getWindowHeight() / 2, Mouse.getX() - Game.getWindowWidth() / 2);
+            shoot(x, y, shootDirection);
         }
     }
 
